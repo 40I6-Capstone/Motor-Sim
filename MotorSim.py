@@ -1,5 +1,3 @@
-from asyncio.windows_events import NULL
-from sys import prefix
 import Discrete_LTI_Sim as dlti
 import numpy as np
 import matplotlib.pyplot as plt
@@ -94,7 +92,7 @@ def checkTopSpeed(time, dist, speed):
 
 
 # Simulate
-if not (name == NULL):
+if not (name):
     dir = os.path.join(os.getcwd(), 'data', name)
     relative_dir = 'data/'+name
 else:
@@ -179,7 +177,7 @@ plt.yticks(np.linspace(0, dist, 10))
 plt.figure(3)
 plt.title("Current Drawn")
 plt.plot(x_points, [i[4] for i in output], label="current")
-plt.ylabel("mA")
+plt.ylabel("mAh")
 plt.xlabel("s")
 plt.grid()
 plt.legend()
