@@ -19,6 +19,8 @@ mass = float(input("Mass of chassis? (kg)\n"))  # kg
 dist = float(input("Distance per trip? (m)\n"))  # m
 wheel_rad = float(input("Wheel Radius? (m)\n"))  # m
 name = input("file name prefix?\n")
+show_graphs = input("Do you want graph pop-ups? (y/n)")
+
 # else:
 #     name = 'test'
 #     free_speed = 200*2*np.pi/60
@@ -57,7 +59,7 @@ K = [0, 0, stall_alpha, 0, stall_current]
 C = [[wheel_rad, 0, 0, 0, 0],
      [0, wheel_rad, 0, 0, 0],
      [0, 0, wheel_rad, 0, 0],
-     [0, 0, 0, 60, 0],
+     [0, 0, 0, 1/60, 0],
      [0, 0, 0, 0, 1]]
 # Input on Ouput transform matrix
 D = [0, 0, 0, 0, 0]
@@ -92,7 +94,7 @@ def checkTopSpeed(time, dist, speed):
 
 
 # Simulate
-if not (name):
+if not (name == ''):
     dir = os.path.join(os.getcwd(), 'data', name)
     relative_dir = 'data/'+name
 else:
@@ -162,6 +164,7 @@ for (index, plot) in enumerate(axs):
     plot.legend()
     plot.grid()
 
+fig.savefig(relative_dir+'/VelocityAndAcceleration.png')
 
 plt.figure(2)
 plt.title("Position")
@@ -172,6 +175,7 @@ plt.grid()
 plt.legend()
 plt.xticks(np.linspace(0, output[-1][0], 10))
 plt.yticks(np.linspace(0, dist, 10))
+plt.figure(2).savefig(relative_dir+'/Position.png')
 
 
 plt.figure(3)
@@ -183,6 +187,8 @@ plt.grid()
 plt.legend()
 plt.xticks(np.linspace(0, output[-1][0], 10))
 plt.yticks(np.linspace(0, output[-1][4], 10))
+plt.figure(3).savefig(relative_dir+"/Current.png")
 
+if(show_graphs == 'y' or show_graphs == 'yes'):
+    plt.show()
 
-plt.show()
