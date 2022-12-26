@@ -79,7 +79,8 @@ lti = dlti.DiscLTI(A,
 def endCondition(travelled, dest):
     return abs(travelled-dest) < d_eps
 
-
+time_to_topspeed = 0
+dist_to_topspeed = 0
 accelerated = False
 
 
